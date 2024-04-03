@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../assets/img/Moviestack_favicon.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sigmar+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Movies</title>
+</head>
+
+<body>
+    <header class="flex flex-wrap flex-col md:flex-row md:justify-between items-center bg-black">
+        <div class="flex flex-wrap items-center self-start">
+            <img class="w-[120px] " src="../assets/img/moviestack_isotipo.png" alt="MovieStack logo">
+            <h1 class="text-white text-4xl md:text-[40px] lg:text-[60px] fluorecentText sigmar-one-regular">MOVIESTACK
+            </h1>
+        </div>
+        <nav class="w-full pb-3 flex justify-around md:w-2/5 md:pb-0 md:pr-4 ">
+            <a class="bg-purple-800 text-white px-4 py-2 border rounded-lg hover:shadow-[0px_0px_6px_rgba(221,_221,_221,_1),_0_0px_10px_rgba(216,_11,_223,_0.904)]"
+                href="../index.html">HOME</a>
+            <a id="active" class="bg-purple-800 text-white px-4 py-2 border rounded-lg hover:shadow-[0px_0px_6px_rgba(221,_221,_221,_1),_0_0px_10px_rgba(216,_11,_223,_0.904)] "
+                href="#">MOVIES</a>
+            <a class="bg-purple-800 text-white px-4 py-2 border rounded-lg hover:shadow-[0px_0px_6px_rgba(221,_221,_221,_1),_0_0px_10px_rgba(216,_11,_223,_0.904)]"
+                href="#">FAVS</a>
+        </nav>
+    </header>
+    <main class="bg-purple-300">
+        <section class="flex flex-wrap flex-col items-center gap-5 pb-4 ">
+            <div class="w-4/5 flex justify-center items-center h-14 py-3 bg-purple-800 mt-2">
+                <h2 class="text-3xl w-full text-center text-white sigmar-one-regular">MOVIES</h2>
+            </div>
+            <div id="contenedor" class="flex flex-wrap flex-col items-center md:flex-row md:justify-center gap-5">
+
+            </div>
+        </section>
+    </main>
+    <footer class="bg-purple-800 h-[50px] flex items-center">
+        <div class="w-full text-center text-white">
+            <p class="">MindHub - Cohort N°54</p>
+        </div>
+    </footer>
+    <!-- js scripts -->
+    <script src="../assets/js/movieStackData.js"></script>
+    <script src="../assets/js/movies.js"></script>
+</body>
+
+</html>

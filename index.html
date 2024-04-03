@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    <link rel="shortcut icon" href="./assets/img/Moviestack_favicon.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sigmar+One&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>MovieStack</title>
+</head>
+
+<body>
+    <header class="flex flex-wrap flex-col md:flex-row md:justify-between items-center bg-black">
+        <div class="flex flex-wrap items-center self-start">
+            <img class="w-[120px] " src="./assets/img/moviestack_isotipo.png" alt="MovieStack logo">
+            <h1 class="text-white text-4xl md:text-[40px] lg:text-[60px] fluorecentText sigmar-one-regular">MOVIESTACK
+            </h1>
+        </div>
+        <nav class="w-full pb-3 flex justify-around md:w-2/5 md:pb-0 md:pr-4 ">
+            <a id="active"
+                class="bg-purple-800 text-white px-4 py-2 border rounded-lg font-semibold fluorecentText hover:shadow-[0px_0px_6px_rgba(221,_221,_221,_1),_0_0px_10px_rgba(216,_11,_223,_0.904)]"
+                href="#">HOME</a>
+            <a class="bg-purple-800 text-white px-4 py-2 border rounded-lg font-semibold fluorecentText hover:shadow-[0px_0px_6px_rgba(221,_221,_221,_1),_0_0px_10px_rgba(216,_11,_223,_0.904)]"
+                href="./views/movies.html">MOVIES</a>
+            <a class="bg-purple-800 text-white px-4 py-2 border rounded-lg font-semibold fluorecentText hover:shadow-[0px_0px_6px_rgba(221,_221,_221,_1),_0_0px_10px_rgba(216,_11,_223,_0.904)]"
+                href="#">FAVS</a>
+        </nav>
+    </header>
+    <main class="bg-purple-300">
+        <section class="flex flex-wrap flex-col items-center gap-5 md:pt-4">
+            <img class=" w-full h-60 object-cover position-center md:w-4/5" src="./assets/img/cinnemaOnline1.jpg"
+                alt="BANNER">
+            <div class="w-4/5">
+                <p class="text-justify font-medium">"Descubre un mundo de entretenimiento en nuestro sitio web de
+                    películas, donde
+                    encontrarás una amplia
+                    selección de títulos para satisfacer todos los gustos y edades. Explora nuestro catálogo que abarca
+                    desde clásicos del cine hasta los últimos estrenos, organizados en categorías para una navegación
+                    fácil. Disfruta de una experiencia de usuario intuitiva, con opciones de búsqueda avanzada y
+                    recomendaciones personalizadas según tus preferencias. Además, mantente al día con noticias de la
+                    industria cinematográfica y reseñas de expertos. Ya sea que busques acción, comedia, drama o
+                    suspenso, nuestro sitio tiene algo para ti. ¡Sumérgete en el mundo del cine desde la comodidad de tu
+                    hogar con nuestro sitio web de películas!"</p>
+            </div>
+        </section>
+        <section class=" mt-7 pb-7 flex flex-wrap flex-col items-center gap-5 md:flex-row md:justify-evenly">
+            <article
+                class="w-[200px] h-[200px] bg-[url('./assets/img/movieCollages1.jpg')] bg-cover bg-no-repeat flex items-center justify-center bg-center rounded-lg">
+                <a href="./views/movies.html" class="w-fit text-[40px] text-purple-200 fluorecentText sigmar-one-regular ">MOVIES</a>
+            </article>
+            <article
+                class="w-[200px] h-[200px]  bg-[url('./assets/img/popcorn1.jpg')] bg-cover bg-no-repeat flex items-center justify-center bg-center rounded-lg cursor">
+                <a href="#" class="text-5xl text-purple-200  fluorecentText sigmar-one-regular">FAVS</a>
+            </article>
+        </section>
+    </main>
+    <footer class="bg-purple-800 h-[50px] flex items-center">
+        <div class="w-full text-center text-white">
+            <p class="">MindHub - Cohort N°54</p>
+        </div>
+    </footer>
+</body>
+
+</html>
