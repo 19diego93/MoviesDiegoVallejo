@@ -1,4 +1,28 @@
 const data = [
+
+
+  {
+    "id": "653035c2c61a4a32bd272480",
+    "image": "https://moviestack.onrender.com/static/y5szbv8zju.jpg",
+    "genres": [
+    "Horror",
+    "Mystery",
+    "Thriller"
+    ],
+    "original_language": "en",
+    "overview": "In 1956 France, a priest is violently murdered, and Sister Irene begins to investigate. She once again comes face-to-face with a powerful evil.",
+    "popularity": 4160.929,
+    "release_date": "9/6/2023",
+    "title": "The Nun II",
+    "vote_average": 6.986,
+    "vote_count": 794,
+    "homepage": "https://www.warnerbros.com/movies/nun2",
+    "revenue": 248010000,
+    "runtime": 110,
+    "status": "Released",
+    "tagline": "Confess your sins.",
+    "budget": 38500000
+    },
  
   {
     id: "653035c2c61a4a32bd272481",
