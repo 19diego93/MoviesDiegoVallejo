@@ -5,7 +5,7 @@ let peliculas = data.map((pelicula) => pelicula);
 let genres = [...new Set(peliculas.map(pelicula=>pelicula.genres).flat())]
 let genresSelect = document.getElementById("genresSelect")
 let movieSearch = document.getElementById("movieSearch")
-// render card
+// no renderiza contiene la estructura a renderizar de las card
 let renderCard = (cardData) => {
   let card = document.createElement("article");
   card.innerHTML = cardConstructor(cardData);
@@ -21,31 +21,44 @@ for (const pelicula of peliculas) {
 }
 contenedor.appendChild(fragmento);
 
-// Filtros por genero
+//  crea los options Filtros por genero
 
  for (const genre of genres) {
   genresSelect.innerHTML += optionGenre(genre)
 }
+
+//filtro por genero
 let currentGenre;
 
 genresSelect.addEventListener("change",()=>
 {  currentGenre= genresSelect.value
   if(currentGenre){
     contenedor.innerHTML ="";
+    if(movieSearch.value){
+      if(filterName(movieSearch.value,filterGenre(peliculas,currentGenre)).length == 0){contenedor.innerHTML="<h4>Movie not found</h4>"}
+      for (const iterator of filterName(movieSearch.value,filterGenre(peliculas,currentGenre))) {
+      fragmento.appendChild(renderCard(iterator));
+    }
+    }else{
   for (const iterator of filterGenre(peliculas,currentGenre)) {
     fragmento.appendChild(renderCard(iterator));
-  }
+  }}
   contenedor.appendChild(fragmento)}else{
     contenedor.innerHTML="";
+    if(movieSearch.value){
+      if(filterName(movieSearch.value,peliculas).length == 0){contenedor.innerHTML="<h4>Movie not found</h4>"}
+      for (const iterator of filterName(movieSearch.value,peliculas)) {
+      fragmento.appendChild(renderCard(iterator));}
+    }else{
       for (const iterator of peliculas) {
   fragmento.appendChild(renderCard(iterator));
-}
+}}
 contenedor.appendChild(fragmento);
   }
 }
 )
 
-//filtros por nombre
+//filtro por nombre
 
 movieSearch.addEventListener("keyup",e=>{
   let searchName = e.target.value;

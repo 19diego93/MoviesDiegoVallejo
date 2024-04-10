@@ -11,11 +11,14 @@ export let cardConstructor = pelicula =>
     0,
     160
   )} <a href="./details.html?id=${pelicula.id}" class="text-red-700 bg-black px-2 pb-[2px] pt-[1px] rounded-lg">...more</a></p>`;
-  //filtros
-export let filterName = (name , genre)=>genre.filter(pelicula => pelicula.title.toLowerCase().includes(name.trim().toLowerCase()))
 
+  //filtro nombre
+export let filterName = (name , array)=>array.filter(pelicula => pelicula.title.toLowerCase().includes(name.trim().toLowerCase()))
+  
+//filtro genero
 export let filterGenre = (array,filter) => array.filter(pelicula => pelicula.genres.includes(filter)) 
-  // opciones de genero
+
+// opciones de genero
 export let optionGenre = genre=>`<option value="${genre}">${genre}</option>`
 
 //!details
