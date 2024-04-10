@@ -11,5 +11,3 @@ let tableDetails2 = document.getElementById("table2")
 tableDetails1.innerHTML = trDetails1(filtrarPeliculas);
 tableDetails2.innerHTML = trDetails2(filtrarPeliculas);
 contenedorDetails.innerHTML=estructuraDetails(filtrarPeliculas);
-
-// fetch("https://moviestack.onrender.com/api/movies",{"x-api-key:0ff70d54-dc0b-4262-9c3d-776cb0f34dbd"})

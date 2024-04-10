@@ -5,6 +5,21 @@ let peliculas = data.map((pelicula) => pelicula);
 let genres = [...new Set(peliculas.map(pelicula=>pelicula.genres).flat())]
 let genresSelect = document.getElementById("genresSelect")
 let movieSearch = document.getElementById("movieSearch")
+
+
+// //! para poder usar eñ render, debo crear la funcion de renderizar
+// fetch("https://moviestack.onrender.com/api/movies",{
+//   headers:{"x-api-key":"0ff70d54-dc0b-4262-9c3d-776cb0f34dbd"}
+// })
+// .then(info => info.json())
+// .then(pelis => {peliculas = pelis.movies
+// console.log(peliculas)});
+
+
+
+
+
+
 // no renderiza contiene la estructura a renderizar de las card
 let renderCard = (cardData) => {
   let card = document.createElement("article");
@@ -13,6 +28,15 @@ let renderCard = (cardData) => {
     " w-[300px] lg:w-[200px] h-[360px] lg:h-[400px] xl:w-[300px] bg-black text-white p-4 flex flex-col gap-3 rounded-2xl hover:bg-purple-900 hover:shadow-[0px_6px_10px_8px_#4a5568] delay-150";
   return card;  
 };
+
+let renderPelis = (arrayDePelis,fragment,cnt)=>{
+  for (const pelicula of arrayDePelis) {
+    fragment.appendChild(renderCard(pelicula));
+  }
+  cnt.appendChild(fragment);
+  
+}
+
 // acumulador pre render
 let fragmento = new DocumentFragment();
 
@@ -43,7 +67,8 @@ genresSelect.addEventListener("change",()=>
   for (const iterator of filterGenre(peliculas,currentGenre)) {
     fragmento.appendChild(renderCard(iterator));
   }}
-  contenedor.appendChild(fragmento)}else{
+  contenedor.appendChild(fragmento)
+}else{
     contenedor.innerHTML="";
     if(movieSearch.value){
       if(filterName(movieSearch.value,peliculas).length == 0){contenedor.innerHTML="<h4>Movie not found</h4>"}
