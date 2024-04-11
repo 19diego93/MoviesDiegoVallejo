@@ -1,24 +1,74 @@
-import {filterName , filterGenre , cardConstructor , optionGenre} from "./functions.js"
+import {filterName , filterGenre , cardConstructor , optionGenre } from "./functions.js"
 
 let contenedor = document.getElementById("contenedor");
-let peliculas = data.map((pelicula) => pelicula);
-let genres = [...new Set(peliculas.map(pelicula=>pelicula.genres).flat())]
 let genresSelect = document.getElementById("genresSelect")
 let movieSearch = document.getElementById("movieSearch")
+let peliculas;
+let genres;
+let currentGenre;
+let searchName;
 
 
-// //! para poder usar eñ render, debo crear la funcion de renderizar
-// fetch("https://moviestack.onrender.com/api/movies",{
-//   headers:{"x-api-key":"0ff70d54-dc0b-4262-9c3d-776cb0f34dbd"}
-// })
-// .then(info => info.json())
-// .then(pelis => {peliculas = pelis.movies
-// console.log(peliculas)});
+fetch("https://moviestack.onrender.com/api/movies",{
+  headers:{"x-api-key":"0ff70d54-dc0b-4262-9c3d-776cb0f34dbd"}
+}) 
+.then(info => info.json())
+.then(pelis => { peliculas = pelis.movies;
+  
+  genres = [...new Set(peliculas.map(pelicula=>pelicula.genres).flat())]
 
+  for (const genre of genres) {
+    genresSelect.innerHTML += optionGenre(genre)
+  }
 
+  elRenderPeli(peliculas,contenedor)
 
+  genresSelect.addEventListener("change",()=>
+  {  currentGenre= genresSelect.value
+   
+    if(currentGenre){
+      if(movieSearch){
+      elRenderPeli(filterName(movieSearch.value,filterGenre(peliculas,currentGenre)),contenedor)
+      }else{
+        elRenderPeli(filterGenre = (peliculas,currentGenre),contenedor)
+      }  
+  }else{
+    if(movieSearch){
+    elRenderPeli(filterName(movieSearch.value,peliculas),contenedor)
+    }else{
+      elRenderPeli(peliculas,contenedor)
+    }
+  }
+  })
 
+  movieSearch.addEventListener("keyup",e=>{
+    searchName = e.target.value;
+      if(genresSelect.value){
+      if(searchName){
+      elRenderPeli(filterName(searchName,filterGenre(peliculas,genresSelect.value)),contenedor)
+      }else{
+        elRenderPeli(filterGenre = (peliculas,genresSelect.value),contenedor)
+      }  
+  }else{
+    if(searchName){
+    elRenderPeli(filterName(searchName,peliculas),contenedor)
+    }else{
+      elRenderPeli(peliculas,contenedor)
+    }
+  }
+  })
+});
+  // funcion que lo que de se renderiza
 
+ function elRenderPeli(array,ubicacion){
+  contenedor.innerHTML=""; 
+  if(array.length!=0){
+let fragmento = new DocumentFragment(); 
+ for (const pelicula of array) {
+    fragmento.appendChild(renderCard(pelicula));
+  }
+  ubicacion.appendChild(fragmento);
+}else{ubicacion.innerHTML="<h4>Movie not found!</h4>"}}
 
 // no renderiza contiene la estructura a renderizar de las card
 let renderCard = (cardData) => {
@@ -29,78 +79,7 @@ let renderCard = (cardData) => {
   return card;  
 };
 
-let renderPelis = (arrayDePelis,fragment,cnt)=>{
-  for (const pelicula of arrayDePelis) {
-    fragment.appendChild(renderCard(pelicula));
-  }
-  cnt.appendChild(fragment);
-  
-}
-
-// acumulador pre render
-let fragmento = new DocumentFragment();
-
-for (const pelicula of peliculas) {
-  fragmento.appendChild(renderCard(pelicula));
-}
-contenedor.appendChild(fragmento);
-
-//  crea los options Filtros por genero
-
- for (const genre of genres) {
-  genresSelect.innerHTML += optionGenre(genre)
-}
-
-//filtro por genero
-let currentGenre;
-
-genresSelect.addEventListener("change",()=>
-{  currentGenre= genresSelect.value
-  if(currentGenre){
-    contenedor.innerHTML ="";
-    if(movieSearch.value){
-      if(filterName(movieSearch.value,filterGenre(peliculas,currentGenre)).length == 0){contenedor.innerHTML="<h4>Movie not found</h4>"}
-      for (const iterator of filterName(movieSearch.value,filterGenre(peliculas,currentGenre))) {
-      fragmento.appendChild(renderCard(iterator));
-    }
-    }else{
-  for (const iterator of filterGenre(peliculas,currentGenre)) {
-    fragmento.appendChild(renderCard(iterator));
-  }}
-  contenedor.appendChild(fragmento)
-}else{
-    contenedor.innerHTML="";
-    if(movieSearch.value){
-      if(filterName(movieSearch.value,peliculas).length == 0){contenedor.innerHTML="<h4>Movie not found</h4>"}
-      for (const iterator of filterName(movieSearch.value,peliculas)) {
-      fragmento.appendChild(renderCard(iterator));}
-    }else{
-      for (const iterator of peliculas) {
-  fragmento.appendChild(renderCard(iterator));
-}}
-contenedor.appendChild(fragmento);
-  }
-}
-)
 
 //filtro por nombre
 
-movieSearch.addEventListener("keyup",e=>{
-  let searchName = e.target.value;
-  // si select tiene value primer if, sino el else 
-  if(currentGenre){
-    contenedor.innerHTML ="";
-    if(filterName(searchName,filterGenre(peliculas,currentGenre)).length == 0){contenedor.innerHTML="<h4>Movie not found</h4>"}
-    for (const iterator of filterName(searchName,filterGenre(peliculas,currentGenre))) {
-      fragmento.appendChild(renderCard(iterator));
-    }
-    contenedor.appendChild(fragmento)
-    }else{         
-        contenedor.innerHTML ="";
-        if(filterName(searchName,peliculas).length == 0){contenedor.innerHTML="<h4>Movie not found</h4>"}
-        for (const iterator of filterName(searchName,peliculas)) {
-          fragmento.appendChild(renderCard(iterator));
-    }
-    contenedor.appendChild(fragmento);
-  }
-})
+

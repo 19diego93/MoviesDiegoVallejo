@@ -2,7 +2,7 @@
 //! movies
   // interior card
 export let cardConstructor = pelicula =>
-`<img class="w-[220px] lg:w-[120px] xl:w-[250px] image-cover rounded-lg self-center border border-purple-800" src="${
+`<img class="w-[220px] lg:w-[120px] xl:w-[250px] image-cover rounded-lg self-center border border-purple-800" src="https://moviestack.onrender.com/static/${
   pelicula.image
 }" alt="${pelicula.title}">
   <h3 class="font-semibold text-base">${pelicula.title}</h3>
@@ -24,7 +24,7 @@ export let optionGenre = genre=>`<option value="${genre}">${genre}</option>`
 //!details
 
 export let estructuraDetails = pelicula=>
-    `<img class="w-[300px] object-cover border rounded-lg" src="${pelicula.image}" alt="">
+    `<img class="w-[300px] object-cover border rounded-lg" src="https://moviestack.onrender.com/static/${pelicula.image}" alt="">
     <div class="w-4/5 lg:w-1/2">
         <h2 class="font-bold">${pelicula.title}</h2>
         <h3 class="font-semibold">${pelicula.tagline}</h3>
@@ -40,6 +40,6 @@ export let estructuraDetails = pelicula=>
     
 export let trDetails2 = pelicula => `
     <tr><th class="px-3 py-2 border border-purple-800">vote average</th><td class="px-3 py-2 border border-purple-800 text-center">${pelicula.vote_average} %</td></tr>
-    <tr><th class="px-3 py-2 border border-purple-800">budget</th><td class="px-3 py-2 border border-purple-800 text-center">USD ${pelicula.budget}</td></tr>
-    <tr><th class="px-3 py-2 border border-purple-800">revenue</th><td class="px-3 py-2 border border-purple-800 text-center">USD ${pelicula.revenue}</td></tr>` 
+    <tr><th class="px-3 py-2 border border-purple-800">budget</th><td class="px-3 py-2 border border-purple-800 text-center">$${pelicula.budget}</td></tr>
+    <tr><th class="px-3 py-2 border border-purple-800">revenue</th><td class="px-3 py-2 border border-purple-800 text-center">$${pelicula.revenue}</td></tr>` 
     
