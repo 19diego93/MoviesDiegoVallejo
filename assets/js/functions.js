@@ -1,17 +1,5 @@
 
 //! movies
-  // interior card
-export let cardConstructor = pelicula =>
-`<img class="w-[220px] lg:w-[120px] xl:w-[250px] image-cover rounded-lg self-center border border-purple-800" src="https://moviestack.onrender.com/static/${
-  pelicula.image
-}" alt="${pelicula.title}">
-  <h3 class="font-semibold text-base">${pelicula.title}</h3>
-  <p class="font-lg">${pelicula.tagline}</p>
-  <p class="text-justify text-sm">${pelicula.overview.slice(
-    0,
-    160
-  )} <a href="./details.html?id=${pelicula.id}" class="text-red-700 bg-black px-2 pb-[2px] pt-[1px] rounded-lg">...more</a></p>`;
-
   //filtro nombre
 export let filterName = (name , array)=>array.filter(pelicula => pelicula.title.toLowerCase().includes(name.trim().toLowerCase()))
   
