@@ -9,6 +9,7 @@ export let filterGenre = (array,filter) => array.filter(pelicula => pelicula.gen
 // opciones de genero
 export let optionGenre = genre=>`<option value="${genre}">${genre}</option>`
 
+
 //!details
 export let estructuraDetails = pelicula=>
     `<img class="w-[300px] object-cover border rounded-lg" src="https://moviestack.onrender.com/static/${pelicula.image}" alt="">

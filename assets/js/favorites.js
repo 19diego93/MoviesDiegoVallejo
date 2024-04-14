@@ -4,6 +4,7 @@ let peliculasFav;
 let genres;
 let listCards=[];
 let dataSetPelId;
+let fragmento = new DocumentFragment(); 
 fetch("https://moviestack.onrender.com/api/movies",{
   headers:{"x-api-key":"0ff70d54-dc0b-4262-9c3d-776cb0f34dbd"}
 }) 
@@ -13,7 +14,7 @@ listCards = JSON.parse(localStorage.getItem("favList"))
 if(listCards){
 peliculasFav = peliculas.filter(pelicula => listCards.includes(pelicula.id))
 
-elRenderPeli(peliculasFav,contenedor)}
+elRenderPeli(peliculasFav,contenedor,fragmento)}
 })
 
 contenedor.addEventListener("click",e=>{
@@ -22,18 +23,17 @@ contenedor.addEventListener("click",e=>{
         listCards = listCards.filter(id => id != dataSetPelId)
         peliculasFav = peliculasFav.filter(peli => peli.id != dataSetPelId)
     localStorage.setItem("favList",JSON.stringify(listCards))
-    elRenderPeli(peliculasFav,contenedor)
+    elRenderPeli(peliculasFav,contenedor,fragmento)
 }
 })
 
-function elRenderPeli(array,ubicacion){
-    contenedor.innerHTML=""; 
-    if(array.length!=0){
-  let fragmento = new DocumentFragment(); 
+function elRenderPeli(array,ubicacion,frag){
+    ubicacion.innerHTML=""; 
+    if(array.length!=0){  
    for (const pelicula of array) {
-      fragmento.appendChild(renderCard(pelicula));
+      frag.appendChild(renderCard(pelicula));
     }
-    ubicacion.appendChild(fragmento);
+    ubicacion.appendChild(frag);
   }else{ubicacion.innerHTML="<h4>You do not have favorite Movies!</h4>"}}
 
 let renderCard = (cardData) => {

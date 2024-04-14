@@ -8,6 +8,7 @@ let genres;
 let currentGenre;
 let searchName;
 let listPelId = [];
+let fragmento = new DocumentFragment();
 //sincronización fuera del evento click y del fetch
 let localStPeli = JSON.parse(localStorage.getItem("favList"))
 if(localStPeli){
@@ -26,21 +27,21 @@ fetch("https://moviestack.onrender.com/api/movies",{
   }
 
 //  renderizar todas las movies
-  elRenderPeli(peliculas,contenedor)
+  elRenderPeli(peliculas,contenedor,fragmento)
 // evento de los generos
   genresSelect.addEventListener("change",()=>
   {  currentGenre= genresSelect.value
       if(currentGenre){
       if(movieSearch){
-      elRenderPeli(filterName(movieSearch.value,filterGenre(peliculas,currentGenre)),contenedor)
+      elRenderPeli(filterName(movieSearch.value,filterGenre(peliculas,currentGenre)),contenedor,fragmento)
       }else{
-        elRenderPeli(filterGenre = (peliculas,currentGenre),contenedor)
+        elRenderPeli(filterGenre = (peliculas,currentGenre),contenedor,fragmento)
       }  
   }else{
     if(movieSearch){
-    elRenderPeli(filterName(movieSearch.value,peliculas),contenedor)
+    elRenderPeli(filterName(movieSearch.value,peliculas),contenedor,fragmento)
     }else{
-      elRenderPeli(peliculas,contenedor)
+      elRenderPeli(peliculas,contenedor,fragmento)
     }
   }
   })
@@ -49,15 +50,15 @@ fetch("https://moviestack.onrender.com/api/movies",{
     searchName = e.target.value;
       if(genresSelect.value){
       if(searchName){
-      elRenderPeli(filterName(searchName,filterGenre(peliculas,genresSelect.value)),contenedor)
+      elRenderPeli(filterName(searchName,filterGenre(peliculas,genresSelect.value)),contenedor,fragmento)
       }else{
-        elRenderPeli(filterGenre(peliculas,genresSelect.value),contenedor)
+        elRenderPeli(filterGenre(peliculas,genresSelect.value),contenedor,fragmento)
       }  
   }else{
     if(searchName){
-    elRenderPeli(filterName(searchName,peliculas),contenedor)
+    elRenderPeli(filterName(searchName,peliculas),contenedor,fragmento)
     }else{
-      elRenderPeli(peliculas,contenedor)
+      elRenderPeli(peliculas,contenedor,fragmento)
     }
   }
   })
@@ -75,28 +76,24 @@ let dataSetPelId = e.target.dataset.peliculaId
 localStorage.setItem("favList",JSON.stringify(listPelId))
 
 if(currentGenre){
-  searchName? elRenderPeli(filterName(searchName,filterGenre(peliculas,currentGenre)),contenedor) : elRenderPeli(filterGenre(peliculas,currentGenre),contenedor)
+  searchName? elRenderPeli(filterName(searchName,filterGenre(peliculas,currentGenre)),contenedor,fragmento) : elRenderPeli(filterGenre(peliculas,currentGenre),contenedor,fragmento)
   
 }else{
-  searchName? elRenderPeli(filterName(searchName,peliculas),contenedor) : elRenderPeli(peliculas,contenedor)
+  searchName? elRenderPeli(filterName(searchName,peliculas),contenedor,fragmento) : elRenderPeli(peliculas,contenedor,fragmento)
 
 }
 }})
 
-
-
 });
-
-  // funcion que lo que de se renderiza
- function elRenderPeli(array,ubicacion){
-  contenedor.innerHTML=""; 
+//render de las cards
+function elRenderPeli(array,ubicacion,frag){
+  ubicacion.innerHTML=""; 
   if(array.length!=0){
-let fragmento = new DocumentFragment(); 
- for (const pelicula of array) {
-    fragmento.appendChild(renderCard(pelicula));
+  for (const pelicula of array) {
+    frag.appendChild(renderCard(pelicula));
   }
-  ubicacion.appendChild(fragmento);
-}else{ubicacion.innerHTML="<h4>Movie not found!</h4>"}}
+  ubicacion.appendChild(frag);
+  }else{ubicacion.innerHTML="<h4>Movie not found!</h4>"}}
 
 // no renderiza contiene la estructura a renderizar de las card
 let renderCard = (cardData) => {
@@ -119,7 +116,8 @@ let renderCard = (cardData) => {
     ` <div class="bg-purple-300 w-[25px] h-[23px] self-end rounded-md absolute top-5" data-pelicula-id="${pelicula.id}"><img class="w-full cursor-pointer" src="../assets/img/favoriteHeart.png" data-pelicula-id="${pelicula.id}" alt="favorite symbole"></div>
     <img class="w-[220px] lg:w-[120px] xl:w-[250px] image-cover rounded-lg self-center border border-purple-800" src="https://moviestack.onrender.com/static/${
       pelicula.image
-    }" alt="${pelicula.title}">`}<h3 class="font-semibold text-base">${pelicula.title}</h3>
+    }" alt="${pelicula.title}">`}
+    <h3 class="font-semibold text-base">${pelicula.title}</h3>
     <p class="font-sm">${pelicula.tagline}</p>
     <p class="text-justify text-xs h-[60px] ">${pelicula.overview.slice(
       0,
